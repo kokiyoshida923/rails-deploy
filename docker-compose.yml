@@ -18,6 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
+      DATABASE_HOST: db
       DATABASE_PASSWORD: postgres
     tty: true
     stdin_open: true
