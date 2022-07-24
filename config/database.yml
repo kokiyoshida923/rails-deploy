@@ -85,6 +85,8 @@ test:
 #
 production:
   <<: *default
-  database: rails_deploy_production
-  username: rails_deploy
-  password: <%= ENV['RAILS_DEPLOY_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DB_DATABASE'] %>
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USER'] %>
+  port: <%= ENV['DB_PORT'] %>
+  password: <%= ENV['DB_HOST'] %>
