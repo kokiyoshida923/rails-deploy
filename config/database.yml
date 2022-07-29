@@ -85,8 +85,8 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['DB_DATABASE'] %>
-  host: <%= ENV['DB_HOST'] %>
-  username: <%= ENV['DB_USER'] %>
-  port: <%= ENV['DB_PORT'] %>
-  password: <%= ENV['DB_HOST'] %>
+  database: <%= Rails.application.credentials.dig(:db, :database) %>
+  host: <%= Rails.application.credentials.dig(:db, :host) %>
+  username: <%= Rails.application.credentials.dig(:db, :user) %>
+  port: <%= Rails.application.credentials.dig(:db, :port) %>
+  password: <%= Rails.application.credentials.dig(:db, :password) %>
