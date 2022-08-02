@@ -11,6 +11,10 @@ FROM ruby:2.7.6
 COPY --from=nodejs /tmp/node /opt/node
 ENV PATH /opt/node/bin:$PATH
 
+RUN apt-get update && apt-get install --no-install-recommends -y vim \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 RUN bundle config set path vendor/bundle
