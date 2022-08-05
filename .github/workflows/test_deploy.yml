@@ -109,9 +109,7 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
-          -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
-          webapp@10.0.65.29 "cd rails-deploy &&
+          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' webapp@10.0.65.29 "cd rails-deploy &&
           git pull origin main &&
           ~/.rbenv/shims/bundle config --local deployment true &&
           ~/.rbenv/shims/bundle config --local without development:test &&
@@ -119,9 +117,7 @@ jobs:
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
           sudo systemctl restart puma.service"
 
-          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
-          -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
-          webapp@10.0.94.168 "cd rails-deploy &&
+          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' webapp@10.0.94.168 "cd rails-deploy &&
           git pull origin main &&
           ~/.rbenv/shims/bundle config --local deployment true &&
           ~/.rbenv/shims/bundle config --local without development:test &&
