@@ -110,7 +110,3 @@ jobs:
       - name: Deploy
         run: |
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' webapp@10.0.65.29
-          echo "Hello World web01"
-
-          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' webapp@10.0.94.168
-          echo "Hello World web02"
