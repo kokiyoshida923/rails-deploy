@@ -106,7 +106,7 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -i ~/.ssh/ec2/rails-deploy-webapp \
+          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
           -o ProxyCommand='ssh -i ~/.ssh/ec2/rails-deploy-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
           webapp@10.0.65.29 "cd rails-deploy &&
@@ -117,7 +117,7 @@ jobs:
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
           sudo systemctl restart puma.service"
 
-          ssh -i ~/.ssh/ec2/rails-deploy-webapp \
+          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
           -o ProxyCommand='ssh -i ~/.ssh/ec2/rails-deploy-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
           webapp@10.0.94.168 "cd rails-deploy &&
