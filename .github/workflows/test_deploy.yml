@@ -109,6 +109,8 @@ jobs:
 
       - name: Deploy
         run: |
+          cat ~/.ssh/rails-deploy-bastion-ssh-key
+          cat ~/.ssh/rails-deploy-webapp-ssh-key
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
           -o UserKnownHostsFile=/dev/null \
