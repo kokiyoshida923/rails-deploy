@@ -101,6 +101,9 @@ jobs:
       - name: Install SSH key
         run: |
           mkdir -p -m 700 ~/.ssh
+          echo "${{ secrets.BASTION_SSH_KEY }}" > ~/.ssh/rails-deploy-bastion-ssh-key
+          chmod 600 ~/.ssh/rails-deploy-bastion-ssh-key
+
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/rails-deploy-webapp-ssh-key
           chmod 600 ~/.ssh/rails-deploy-webapp-ssh-key
 
@@ -108,7 +111,7 @@ jobs:
         run: |
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
-          -o ProxyCommand='ssh -i ~/.ssh/ec2/rails-deploy-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
+          -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
           webapp@10.0.65.29 "cd rails-deploy &&
           git pull origin main &&
           ~/.rbenv/shims/bundle config --local deployment true &&
@@ -119,7 +122,7 @@ jobs:
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
-          -o ProxyCommand='ssh -i ~/.ssh/ec2/rails-deploy-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
+          -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key ec2-user@3.113.11.91 -W %h:%p' \
           webapp@10.0.94.168 "cd rails-deploy &&
           git pull origin main &&
           ~/.rbenv/shims/bundle config --local deployment true &&
