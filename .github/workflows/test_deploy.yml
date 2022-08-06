@@ -9,7 +9,6 @@ on:
 jobs:
   rspec:
     name: RSpec
-    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -22,13 +21,6 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
     steps:
-      - name: Echo github
-        run: |
-          echo 'github.ref' ${{ github.ref }}
-          echo 'github.ref_name' ${{ github.ref_name }}
-          echo 'github.head_ref' ${{ github.head_ref }}
-          echo 'github.base_ref' ${{ github.base_ref }}
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -71,16 +63,8 @@ jobs:
 
   rubocop:
     name: Rubocop
-    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Echo github
-        run: |
-          echo 'github.ref' ${{ github.ref }}
-          echo 'github.ref_name' ${{ github.ref_name }}
-          echo 'github.head_ref' ${{ github.head_ref }}
-          echo 'github.base_ref' ${{ github.base_ref }}
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -114,13 +98,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Echo github
-        run: |
-          echo 'github.ref' ${{ github.ref }}
-          echo 'github.ref_name' ${{ github.ref_name }}
-          echo 'github.head_ref' ${{ github.head_ref }}
-          echo 'github.base_ref' ${{ github.base_ref }}
-
       - name: Install SSH key
         run: |
           mkdir -p -m 700 ~/.ssh
