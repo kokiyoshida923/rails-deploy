@@ -9,6 +9,7 @@ on:
 jobs:
   rspec:
     name: RSpec
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -70,6 +71,7 @@ jobs:
 
   rubocop:
     name: Rubocop
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Echo github
