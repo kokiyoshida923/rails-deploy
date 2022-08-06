@@ -6,7 +6,7 @@ RSpec.describe 'StaticPages', type: :request do
       get '/api/v1/'
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body).length).to eq(1)
-      expect(JSON.parse(response.body)['message']).to eq('Hello World')
+      expect(JSON.parse(response.body)['message']).to eq('Deployment was successful')
     end
   end
 
@@ -15,7 +15,7 @@ RSpec.describe 'StaticPages', type: :request do
       get '/api/v1/home'
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body).length).to eq(1)
-      expect(JSON.parse(response.body)['message']).to eq('Hello World')
+      expect(JSON.parse(response.body)['message']).to eq('Deployment was successful')
     end
   end
 end
