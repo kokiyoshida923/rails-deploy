@@ -2,7 +2,7 @@ module Api
   module V1
     class StaticPagesController < ApplicationController
       def home
-        message = 'Deployment was successful'
+        message = 'Hello world'
         render json: { message: message }
       end
     end
