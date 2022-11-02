@@ -142,21 +142,21 @@ jobs:
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
           -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key -o StrictHostKeyChecking=no ec2-user@${{ secrets.BASTION_HOST_NAME }} -W %h:%p' \
-          webapp@${{ secrets.WEB01_HOST_NAME }} 'cd rails-deploy &&
+          webapp@${{ secrets.WEB01_HOST_NAME }} "cd rails-deploy &&
           git pull origin main &&
           ~/.rbenv/shims/bundle config --local deployment true &&
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          echo "$(ls -al)"'
+          kill -SIGUSR2 `cat tmp/pids/server.pid`"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
           -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key -o StrictHostKeyChecking=no ec2-user@${{ secrets.BASTION_HOST_NAME }} -W %h:%p' \
-          webapp@${{ secrets.WEB02_HOST_NAME }} 'cd rails-deploy &&
+          webapp@${{ secrets.WEB02_HOST_NAME }} "cd rails-deploy &&
           git pull origin main &&
           ~/.rbenv/shims/bundle config --local deployment true &&
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          echo "$(ls -al)"'
+          kill -SIGUSR2 `cat tmp/pids/server.pid`"
