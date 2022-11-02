@@ -150,7 +150,8 @@ jobs:
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
           cd tmp/pids/ &&
           cat server.pid > hoge.txt &&
-          kill -SIGUSR2 `hoge.txt`"
+          cat hoge.txt &&
+          kill -SIGUSR2 `cat hoge.txt`"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -163,4 +164,5 @@ jobs:
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
           cd tmp/pids/ &&
           cat server.pid > hoge.txt &&
-          kill -SIGUSR2 `hoge.txt`"
+          cat hoge.txt &&
+          kill -SIGUSR2 `cat hoge.txt`"
