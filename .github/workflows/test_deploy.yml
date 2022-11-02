@@ -45,7 +45,7 @@ jobs:
 
       - name: After gem cache
         run: |
-          echo "-->${{steps.cache-gems.outputs.cache-hit}}<--"  ->  true
+          echo "${{ steps.cache-gems.outputs.cache-hit }}"
 
       - name: Install dependencies
         run: |
@@ -118,7 +118,7 @@ jobs:
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          ~/.rbenv/shims/bundle exec pumactl restart"
+          kill -SIGUSR2 $(cat ~/rails-deploy/tmp/pids/server.pid)"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -129,4 +129,4 @@ jobs:
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          ~/.rbenv/shims/bundle exec pumactl restart"
+          kill -SIGUSR2 $(cat ~/rails-deploy/tmp/pids/server.pid)"
