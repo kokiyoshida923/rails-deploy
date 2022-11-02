@@ -147,11 +147,12 @@ jobs:
           ~/.rbenv/shims/bundle config --local deployment true &&
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
-          RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          cd tmp/pids/ &&
-          cat server.pid > hoge.txt &&
-          cat hoge.txt &&
-          kill -SIGUSR2 2914"
+          RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate"
+
+          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
+          -o StrictHostKeyChecking=no \
+          -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key -o StrictHostKeyChecking=no ec2-user@${{ secrets.BASTION_HOST_NAME }} -W %h:%p' \
+          ec2-user@${{ secrets.WEB01_HOST_NAME }} "sudo systemctl restart puma.service"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -161,8 +162,9 @@ jobs:
           ~/.rbenv/shims/bundle config --local deployment true &&
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
-          RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          cd tmp/pids/ &&
-          cat server.pid > hoge.txt &&
-          cat hoge.txt &&
-          kill -SIGUSR2 18074"
+          RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate"
+
+          ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
+          -o StrictHostKeyChecking=no \
+          -o ProxyCommand='ssh -i ~/.ssh/rails-deploy-bastion-ssh-key -o StrictHostKeyChecking=no ec2-user@${{ secrets.BASTION_HOST_NAME }} -W %h:%p' \
+          ec2-user@${{ secrets.WEB02_HOST_NAME }} "sudo systemctl restart puma.service"
