@@ -24,6 +24,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Echo github
+        run: |
+          echo 'github.ref' ${{ github.ref }}
+          echo 'github.ref_name' ${{ github.ref_name }}
+          echo 'github.head_ref' ${{ github.head_ref }}
+          echo 'github.base_ref' ${{ github.base_ref }}
+
+          echo 'github.workspace' ${{ github.workspace }}
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -68,6 +77,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Echo github
+        run: |
+          echo 'github.ref' ${{ github.ref }}
+          echo 'github.ref_name' ${{ github.ref_name }}
+          echo 'github.head_ref' ${{ github.head_ref }}
+          echo 'github.base_ref' ${{ github.base_ref }}
+
+          echo 'github.workspace' ${{ github.workspace }}
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
@@ -98,6 +116,15 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      - name: Echo github
+        run: |
+          echo 'github.ref' ${{ github.ref }}
+          echo 'github.ref_name' ${{ github.ref_name }}
+          echo 'github.head_ref' ${{ github.head_ref }}
+          echo 'github.base_ref' ${{ github.base_ref }}
+
+          echo 'github.workspace' ${{ github.workspace }}
+
       - name: Install SSH key
         run: |
           mkdir -p -m 700 ~/.ssh
@@ -118,7 +145,7 @@ jobs:
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          kill -SIGUSR2 $(cat ~/rails-deploy/tmp/pids/server.pid)"
+          kill -SIGUSR2 $(cat tmp/pids/server.pid)"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -129,4 +156,4 @@ jobs:
           ~/.rbenv/shims/bundle config --local without development:test &&
           ~/.rbenv/shims/bundle install &&
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
-          kill -SIGUSR2 $(cat ~/rails-deploy/tmp/pids/server.pid)"
+          kill -SIGUSR2 $(cat tmp/pids/server.pid)"
