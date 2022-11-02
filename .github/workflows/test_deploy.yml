@@ -151,7 +151,7 @@ jobs:
           cd tmp/pids/ &&
           cat server.pid > hoge.txt &&
           cat hoge.txt &&
-          kill -SIGUSR2 `cat hoge.txt`"
+          kill -SIGUSR2 2914"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -165,4 +165,4 @@ jobs:
           cd tmp/pids/ &&
           cat server.pid > hoge.txt &&
           cat hoge.txt &&
-          kill -SIGUSR2 `cat hoge.txt`"
+          kill -SIGUSR2 18074"
