@@ -150,8 +150,7 @@ jobs:
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
           ls -al &&
           pwd &&
-          cat tmp/pids/server.pid &&
-          kill -SIGUSR2 `cat tmp/pids/server.pid`"
+          cat tmp/pids/server.pid"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -164,5 +163,4 @@ jobs:
           RAILS_ENV=production ~/.rbenv/shims/bundle exec rails db:migrate &&
           ls -al &&
           pwd &&
-          cat tmp/pids/server.pid &&
-          kill -SIGUSR2 `cat tmp/pids/server.pid`"
+          cat tmp/pids/server.pid"
