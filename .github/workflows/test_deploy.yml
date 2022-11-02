@@ -152,7 +152,8 @@ jobs:
           pwd &&
           cd tmp/pids/ &&
           ls -al &&
-          pwd"
+          pwd &&
+          cat server.pid"
 
           ssh -i ~/.ssh/rails-deploy-webapp-ssh-key \
           -o StrictHostKeyChecking=no \
@@ -167,4 +168,5 @@ jobs:
           pwd &&
           cd tmp/pids/ &&
           ls -al &&
-          pwd"
+          pwd &&
+          cat server.pid"
