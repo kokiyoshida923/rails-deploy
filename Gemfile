@@ -45,5 +45,9 @@ group :development do
   gem 'rubocop-rspec', require: false
 end
 
+group :production do
+  gem 'sd_notify'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gemf
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
